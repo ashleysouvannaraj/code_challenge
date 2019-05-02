@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-
+import {connect} from 'react-redux'
 
 class ModalNine extends Component {
     constructor(props){
@@ -12,6 +12,7 @@ class ModalNine extends Component {
             number: '',
         }
     }
+
     
 
     handleNameChange = (e) => {
@@ -34,7 +35,6 @@ class ModalNine extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        alert("name = " + localStorage.getItem("name", "number"));
     }
 
     
@@ -73,6 +73,13 @@ class ModalNine extends Component {
           </Modal>
         )
     }
-    
+
 }
-export default ModalNine;
+        let mapDispatchToProps = (dispatch) => {
+            return {
+                name: (name) => dispatch({type: "ADD", name: name }),
+                number: (number) => dispatch({type: "ADD", number: number})
+            }
+        }
+
+export default connect(null,mapDispatchToProps)(ModalNine)
